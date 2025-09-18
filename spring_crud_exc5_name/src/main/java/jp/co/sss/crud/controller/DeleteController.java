@@ -49,7 +49,7 @@ public class DeleteController {
 
 		//削除実施
 		//TODO DeleteEmployeeService完成後にコメントを外す
-		//		deleteEmployeeService.execute(empId);
+				deleteEmployeeService.execute(empId);
 		return "redirect:/delete/complete";
 	}
 

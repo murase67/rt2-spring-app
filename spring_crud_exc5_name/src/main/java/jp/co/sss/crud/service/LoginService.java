@@ -30,6 +30,7 @@ public class LoginService {
 	//TODO ここに記述
 	@Autowired
 	EmployeeRepository repository;
+
 	/**
 	 * ログイン認証処理を実行します。
 	 * 
@@ -47,14 +48,12 @@ public class LoginService {
 	 *         <li>失敗時：LoginResultBean.failLogin(エラーメッセージ)の結果</li>
 	 *         </ul>
 	 */
-	//TODO ここに記述
 	public LoginResultBean execute(LoginForm loginForm) {
 		LoginResultBean loginResultBean = null;
-		Employee employee = repository.findByempIdAndEmpPass(loginForm.getEmpId(), loginForm.getEmpPass());
-		
-		EmployeeBean employeeBean = BeanManager.copyEntityToBean(employee);
-		
-		if(employeeBean != null) {
+		Employee employee = repository.findByEmpIdAndEmpPass(loginForm.getEmpId(), loginForm.getEmpPass());
+
+		if (employee != null) {
+			EmployeeBean employeeBean = BeanManager.copyEntityToBean(employee);
 			loginResultBean = LoginResultBean.succeedLogin(employeeBean);
 		}else {
 			loginResultBean = LoginResultBean.failLogin("社員ID、またはパスワードが間違っています。");

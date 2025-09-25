@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()}, ~{::head/script})}">
 
 <head>
 	<title>会員登録入力 | シェアードショップ</title>
 	<meta charset="UTF-8" />
+	<script th:src="@{/js/spring_crud.js}" type="text/javascript"></script>
 </head>
 
 <body class="admin user_regist_input_admin">

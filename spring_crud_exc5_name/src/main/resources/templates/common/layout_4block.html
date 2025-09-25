@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(body)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(body, scripts)">
 <head lang="ja">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/stylesheet.css}" />
 <title>社員管理システム</title>
+<script th:src="@{/js/spring_crud.js}" type="text/javascript"></script>
 </head>
 <body>
 	<!--/* ヘッダー */-->

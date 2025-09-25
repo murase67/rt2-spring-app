@@ -1,70 +1,87 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_4block :: layout(~{::body/content()}, ~{::head/script})}">
 
 <head>
 	<title>社員一覧 | 社員管理システム</title>
 	<meta charset="UTF-8" />
+	<script th:src="@{/js/spring_crud.js}" type="text/javascript"></script>
 </head>
 
 <body class="admin user_list">
 	<h3>社員一覧画面</h3>
-
-	<div class="regist_link">
-		<a th:href="@{/regist/input}">新規社員登録</a>
+	<div class="head">
+		<div class="listSize">
+			<p th:if="${listSize != null and listSize > 0}">検索結果：<span th:text="${listSize}"></span>件</p>
+			<p th:if="${listSize == null and listSize > 0}">&nbsp;</p>
+		</div>
+		<div class="regist_link">
+			<a href="javascript:void(0);" th:onclick="RegistAlert()">新規社員登録</a>
+		</div>
 	</div>
 
 	<!--	該当社員が0名の場合-->
 	<th:block th:if="${#lists.isEmpty(employees)}">
 		<div class="message">
 			<p class="back_to_top_message">該当する社員は存在しません。</p>
-			<p class="back_to_top_link">
-				<a th:href="@{/list}">一覧表示に戻る</a>
-			</p>
+			<div class="back_to_top_link">
+<!--				<a th:href="@{/list}">一覧表示に戻る</a>-->
+			</div>
 		</div>
 	</th:block>
 	<!--	該当社員がいる場合-->
-	<table class="list_table" th:if="!${#lists.isEmpty(employees)}">
-		<tr>
-			<th>社員ID</th>
-			<th>社員名</th>
-			<th class="gender">性別</th>
-			<th class="address">住所</th>
-			<th class="birthday">生年月日</th>
-			<th class="authority">権限</th>
-			<th class="deptName">部署名</th>
-			<th class="button">変更</th>
-			<th class="button">削除</th>
-		</tr>
-		<tr th:each="employee: ${employees}">
-			<td th:text="${employee.empId}"></td>
-			<td th:text="${employee.empName}"></td>
-			<!--
+	<div class="table-scroll">
+		<table th:if="!${#lists.isEmpty(employees)}">
+			<thead>
+				<tr>
+					<th>社員ID</th>
+					<th>社員名</th>
+					<th class="gender">性別</th>
+					<th class="address">住所</th>
+					<th class="birthday">生年月日</th>
+					<th class="authority">権限</th>
+					<th class="deptName">部署名</th>
+					<th class="button">変更</th>
+					<th class="button">削除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee: ${employees}">
+					<td th:text="${employee.empId}"></td>
+					<td th:text="${employee.empName}"></td>
+					<!--
 				th:switchとth:caseはJavaのswitch文の様に条件分岐を表現できる
 				この場合はgender=1の場合[男性]、gender=2の場合[女性]と表示される
 			-->
-			<td th:switch="${employee.gender}">
-				<span th:case="1">男性</span> <span th:case="2">女性</span>
-			</td>
-			<td th:text="${employee.address}"></td>
-			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
-			<td th:switch="${employee.authority}">
-				<span th:case="1">一般</span> <span th:case="2">管理者</span>
-			</td>
-			<td th:text="${employee.deptName}"></td>
-			<td>
-				<form method="get" th:action="@{/update/input}">
-					<input type="hidden" name="empId" th:value="${employee.empId}" />
-					<input type="submit" value="変更" />
-				</form>
-			</td>
-			<td>
-				<form method="get" th:action="@{/delete/check}">
-					<input type="hidden" name="empId" th:value="${employee.empId}" />
-					<input type="submit" value="削除" class="delete" />
-				</form>
-			</td>
-		</tr>
-	</table>
+					<td th:switch="${employee.gender}">
+						<span th:case="1">男性</span> <span th:case="2">女性</span>
+					</td>
+					<td th:text="${employee.address}"></td>
+					<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+					<td th:switch="${employee.authority}">
+						<span th:case="1">一般</span> <span th:case="2">管理者</span>
+					</td>
+					<td th:text="${employee.deptName}"></td>
+					<td>
+						<form method="get" th:action="@{/update/input}" onclick="changeDisabled()">
+							<input type="hidden" name="empId" th:value="${employee.empId}" />
+							<input type="submit" value="変更" />
+						</form>
+					</td>
+					<td>
+						<form method="get" action="javascript:void(0);">
+							<input type="hidden" name="empId" th:value="${employee.empId}" />
+							<input type="submit" value="削除" class="delete"
+								th:onclick="|DeleteAlert(${employee.empId})|" />
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="allList">
+		<a th:href="@{/list}">一覧表示に戻る</a>
+	</div>
 </body>
 
 </html>

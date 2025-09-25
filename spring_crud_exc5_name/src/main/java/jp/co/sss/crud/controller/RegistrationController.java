@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.service.RegisterEmployeeService;
@@ -25,7 +26,7 @@ public class RegistrationController {
 	 * @return 遷移先のビュー
 	 */
 	@RequestMapping(path = "/regist/input", method = RequestMethod.GET)
-	public String inputRegist(@ModelAttribute EmployeeForm employeeForm) {
+	public String inputRegist(@ModelAttribute EmployeeForm employeeForm, HttpSession session) {
 		employeeForm.setGender(Constant.DEFAULT_GENDER);
 		employeeForm.setAuthority(Constant.DEFAULT_AUTHORITY);
 		employeeForm.setDeptId(Constant.DEFAULT_DEPT_ID);

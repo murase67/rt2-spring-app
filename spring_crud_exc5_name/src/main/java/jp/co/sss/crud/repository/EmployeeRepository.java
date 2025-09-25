@@ -20,4 +20,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	
 	//部署ID検索
 	List<Employee> findByDepartmentOrderByEmpId(Department department);
+	
+	//権限検索
+	List<Employee> findByAuthorityOrderByEmpId(Integer authority);
 }

@@ -50,5 +50,4 @@ public class IndexController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
 }

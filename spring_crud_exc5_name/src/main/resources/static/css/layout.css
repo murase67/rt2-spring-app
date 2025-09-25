@@ -6,12 +6,13 @@
 body {
 	margin: 0;
 	padding: 0;
+	background-color: #F2F9F1;
 }
 
 .content {
 	display: flex;
 	flex-direction: row;
-	justify-content:space-between;
+	justify-content: space-between;
 	width: 920px;
 	margin: 0px auto;
 }
@@ -22,9 +23,9 @@ body {
 
 /* ---- ヘッダー ---- */
 header {
-	height: 60px;
+	height: 80px;
 	width: 100%;
-	background-color: #87CEEB;
+	background-color: #B6CDBD;
 	padding-top: 10px;
 }
 
@@ -32,28 +33,59 @@ header .title {
 	margin-left: 10px;
 	line-height: 45px;
 	font-size: 25pt;
+	color: #2F5249;
+	font-weight: bold;
+	padding: 0.3em 0.5em;
+	border-left: 10px double #5C715E;
 }
 
-header .user_info {
+header .textlink {
 	margin-right: 20px;
 	line-height: 45px;
 	text-align: right;
+	font-weight: bolder;
+	padding-top: 10px;
 }
 
-header .user_info a {
+header .textlink a {
+	position: relative;
+	color: #5D688A;
 	text-decoration: none;
+}
+
+header .textlink a:hover {
+	color: #124170;
+}
+
+header .textlink a::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 10px;
+	background-color: rgba(92, 113, 94, 0.7);
+	transition: width 0.3s;
+}
+
+header .textlink a:hover::after {
+	width: 100%;
 }
 
 /* ---- サイドバー ---- */
 aside {
 	width: 200px;
+	margin-top: 10px;
 }
 
 aside .title {
-	background-color: #add8e6;
-	margin: 5px 0px 10px 10px;
+	background-color: #5C715E;
+	margin: 20px 0px 10px 10px;
 	padding: 3px;
 	font-weight: bold;
+	color: #F2F9F1;
+	text-align: center;
+	border-radius: 4px;
 }
 
 aside .form {
@@ -78,7 +110,7 @@ aside input[type=submit] {
 
 /* ---- メイン ---- */
 article {
-	
+
 	width: 700px;
 	padding-left: 20px;
 }
@@ -86,10 +118,13 @@ article {
 
 /* ---- フッター ---- */
 footer {
-	height: 30px;
-	background-color: #87CEEB;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #B6CDBD;
 	text-align: center;
 	font-size: 8pt;
 	line-height: 30px;
+	color: #5D688A;
 }
-

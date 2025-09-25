@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+	th:replace="~{common/layout_4block :: layout(~{::body/content()}, ~{::head/script})}">
+
 <head>
-<title>社員変更完了 | 社員管理システム</title>
-<meta charset="UTF-8" />
+	<title>社員変更完了 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<script th:src="@{/js/spring_crud.js}" type="text/javascript"></script>
+
 </head>
+
 <body class="admin user_update_complete_admin">
-		<h2 class="title">社員変更完了</h2>
-		<div class="message">
+	<h2 class="title">社員変更完了</h2>
+	<div class="message">
 		<p class="complete_message">社員情報の変更が完了しました。</p>
 		<p class="complete_link"><a th:href="@{/list}">社員一覧に戻る</a></p>
-		</div>
+	</div>
 </body>
+
 </html>

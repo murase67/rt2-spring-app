@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.bean.EmployeeBean;
 import jp.co.sss.crud.service.SearchAllEmployeesService;
 import jp.co.sss.crud.service.SearchForEmployeesByDepartmentService;
 import jp.co.sss.crud.service.SearchForEmployeesByEmpNameService;
+import jp.co.sss.crud.service.SerchForEmployeesByAuthortyService;
 
 @Controller
 public class ListController {
@@ -25,6 +27,9 @@ public class ListController {
 
 	@Autowired
 	SearchForEmployeesByDepartmentService searchForEmployeesByDepartmentService;
+	
+	@Autowired
+	SerchForEmployeesByAuthortyService serchForEmployeesByAuthortyService;
 
 	/**
 	 * 社員情報を全件検索した結果を出力
@@ -34,13 +39,14 @@ public class ListController {
 	 * @throws ParseException 
 	 */
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public String findAll(Model model) {
+	public String findAll(Model model, HttpSession session) {
 
 		List<EmployeeBean> allEmployeeList = null;
 		//TODO SearchAllEmployeesService完成後にコメントを外す
 				allEmployeeList = searchAllEmployeesService.execute();
 
 		model.addAttribute("employees", allEmployeeList);
+		
 		return "list/list";
 	}
 
@@ -61,6 +67,10 @@ public class ListController {
 				searchByEmpNameList = searchForEmployeesByEmpNameService.execute(empName);
 
 		model.addAttribute("employees", searchByEmpNameList);
+		model.addAttribute("empName", empName);
+		
+		Integer size = searchByEmpNameList.size();
+		model.addAttribute("listSize", size);
 		return "list/list";
 	}
 
@@ -81,6 +91,27 @@ public class ListController {
 				searchByDepartmentList=searchForEmployeesByDepartmentService.execute(deptId);
 
 		model.addAttribute("employees", searchByDepartmentList);
+		model.addAttribute("selectedDeptId", deptId);
+		
+		Integer size = searchByDepartmentList.size();
+		model.addAttribute("listSize", size);
+		
+		return "list/list";
+	}
+	
+	@RequestMapping(path = "/list/authority", method = RequestMethod.GET)
+	public String findByAuthority(Integer authority, Model model) {
+		
+		List<EmployeeBean> searchByAuthorityList = null;
+		
+		searchByAuthorityList = serchForEmployeesByAuthortyService.execute(authority);
+		
+		model.addAttribute("employees", searchByAuthorityList);
+		model.addAttribute("selectedAuthority", authority);
+		
+		Integer size = searchByAuthorityList.size();
+		model.addAttribute("listSize", size);
+		
 		return "list/list";
 	}
 }

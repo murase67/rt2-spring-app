@@ -18,13 +18,13 @@ body {
 }
 
 .login {
-	width: 100%;
+	max-width: 100%;
 }
 
 /* ---- ヘッダー ---- */
 header {
 	height: 80px;
-	width: 100%;
+	max-width: 100%;
 	background-color: #B6CDBD;
 	padding-top: 10px;
 }

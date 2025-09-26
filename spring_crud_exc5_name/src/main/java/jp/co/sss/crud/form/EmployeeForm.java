@@ -32,7 +32,7 @@ public class EmployeeForm {
 
 	/** 生年月日 */
 	@NotNull
-	@Past
+	@Past(message="{Past.EmployeeForm.birthday}")
 	private Date birthday;
 
 	/** 権限 */

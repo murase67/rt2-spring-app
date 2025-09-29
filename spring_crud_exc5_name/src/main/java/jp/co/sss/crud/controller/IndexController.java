@@ -28,7 +28,6 @@ public class IndexController {
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String login(@Valid @ModelAttribute LoginForm loginForm, BindingResult result, Model model, HttpSession sesson) {
 
-		//TODO LoginServiceが完成後にコメントを外す
 				LoginResultBean loginResultBean = loginService.execute(loginForm);
 		
 				if(result.hasErrors()) {

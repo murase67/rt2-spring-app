@@ -15,6 +15,9 @@ public class LoginCheckFilter extends HttpFilter {
 	/**
 	 * ユーザのログイン状態の判定を実行します。
 	 * 
+	 * ログイン状態　　社員一覧画面に遷移
+	 * ログアウト状態　ログイン画面に遷移しログインを求める
+	 * 
 	 */
 	@Override
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException { 

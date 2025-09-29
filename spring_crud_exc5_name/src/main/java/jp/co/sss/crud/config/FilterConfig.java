@@ -11,6 +11,9 @@ import jp.co.sss.crud.filter.LoginCheckFilter;
 @Configuration
 public class FilterConfig implements WebMvcConfigurer{
 	
+	/**
+	 * LiginCheckFilterを1番目に実行するという処理
+	 */
 	@Bean
 	public FilterRegistrationBean<LoginCheckFilter> configLoginCheckFilter(){
 		FilterRegistrationBean<LoginCheckFilter> bean = new FilterRegistrationBean<LoginCheckFilter>();
@@ -20,6 +23,9 @@ public class FilterConfig implements WebMvcConfigurer{
 		return bean;
 	}
 	
+	/**
+	 * AcountCheckFilterを2番目に実行するという処理
+	 * */
 	@Bean
 	public FilterRegistrationBean<AccountCheckFilter> configAccountCheckFilter(){
 		FilterRegistrationBean<AccountCheckFilter> bean = new FilterRegistrationBean<AccountCheckFilter>();

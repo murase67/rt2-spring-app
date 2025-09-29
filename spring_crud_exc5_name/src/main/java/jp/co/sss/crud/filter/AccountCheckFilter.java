@@ -11,6 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.bean.EmployeeBean;
 
 public class AccountCheckFilter extends HttpFilter {
+	
+	/**
+	 * 登録画面と削除画面のリクエストが行われると権限のチェックを行う
+	 * 
+	 * 一般ユーザ　　ログイン画面に遷移
+	 * 管理者ユーザ　登録入力画面、削除確認画面に遷移
+	 *
+	 * */
 	@Override
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
